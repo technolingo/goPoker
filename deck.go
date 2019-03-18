@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-// a custom type 'deck', a slice of strings
 type deck []string
 
+// newDeck func creates a full & ordered deck of cards.
 func newDeck() deck {
 	suits := [4]string{"Hearts", "Spades", "Diamonds", "Clubs"}
 	// declare a ranks slice with initial value 'A'
@@ -37,32 +37,33 @@ func newDeck() deck {
 	return cards
 }
 
-// func (receiver) func-name(args) return-type {}
-// any var of type 'deck' can access this print method
+// print is a method of the deck type.
+// It prints out all the cards in the deck.
 func (d deck) print() {
 	for _, card := range d {
 		fmt.Println(card)
 	}
 }
 
-// deal a given number of cards from a given deck
-// return a hand of cards & the remaining deck
+// deal func takes a deck of cards & a deck size.
+// And it returns a hand of cards & the remaining deck.
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
 
-// a helper method that converts a given deck into
-// one large string with a given delimiter
+// toString is a method of the deck type.
+// It converts the deck into one long string with a given delimiter.
 func (d deck) toString(delimiter string) string {
 	return strings.Join(d, delimiter)
 }
 
-// save a given deck to a file
+// saveToFile is a method of the deck type.
+// It saves the deck to a file with a given filepath and delimiter.
 func (d deck) saveToFile(filepath string, delimiter string) error {
 	return ioutil.WriteFile(filepath, []byte(d.toString(delimiter)), 0666)
 }
 
-// load a deck from a given file
+// loadFromFile func loads the deck from a given file.
 func loadFromFile(filepath string, delimiter string) deck {
 	bs, err := ioutil.ReadFile(filepath)
 	// error handling
