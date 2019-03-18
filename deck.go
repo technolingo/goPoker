@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -49,8 +50,13 @@ func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
 }
 
-// a helper func that converts a given deck into
+// a helper method that converts a given deck into
 // one large string with a given delimiter
 func (d deck) toString(delimiter string) string {
 	return strings.Join(d, delimiter)
+}
+
+// save a given deck to a file
+func (d deck) saveToFile(filepath string, delimiter string) error {
+	return ioutil.WriteFile(filepath, []byte(d.toString(delimiter)), 0666)
 }
