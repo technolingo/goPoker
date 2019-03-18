@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"strconv"
+	"strings"
 )
 
 // a custom type 'deck', a slice of strings
@@ -46,4 +47,10 @@ func (d deck) print() {
 // return a hand of cards & the remaining deck
 func deal(d deck, handSize int) (deck, deck) {
 	return d[:handSize], d[handSize:]
+}
+
+// a helper func that converts a given deck into
+// one large string with a given delimiter
+func (d deck) toString(delimiter string) string {
+	return strings.Join(d, delimiter)
 }
