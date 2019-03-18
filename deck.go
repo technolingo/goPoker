@@ -44,8 +44,6 @@ func (d deck) print() {
 
 // deal a given number of cards from a given deck
 // return a hand of cards & the remaining deck
-func (d deck) deal(handSize int) (deck, deck) {
-	hand := d[:handSize]
-	deck := d[handSize:]
-	return hand, deck
+func deal(d deck, handSize int) (deck, deck) {
+	return d[:handSize], d[handSize:]
 }

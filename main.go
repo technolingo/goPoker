@@ -1,6 +1,11 @@
 package main
 
+import "fmt"
+
 func main() {
 	cards := newDeck()
-	cards.print()
+	hand, deck := deal(cards, 5)
+	hand.print()
+	fmt.Println("========")
+	deck.print()
 }
