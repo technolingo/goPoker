@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
 	"strconv"
 	"strings"
 )
@@ -59,4 +60,15 @@ func (d deck) toString(delimiter string) string {
 // save a given deck to a file
 func (d deck) saveToFile(filepath string, delimiter string) error {
 	return ioutil.WriteFile(filepath, []byte(d.toString(delimiter)), 0666)
+}
+
+// load a deck from a given file
+func loadFromFile(filepath string, delimiter string) deck {
+	bs, err := ioutil.ReadFile(filepath)
+	// error handling
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	return deck(strings.Split(string(bs), delimiter))
 }
