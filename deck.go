@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -72,4 +73,18 @@ func loadFromFile(filepath string, delimiter string) deck {
 		os.Exit(1)
 	}
 	return deck(strings.Split(string(bs), delimiter))
+}
+
+// shuffle is a method of the deck type.
+// It randomises the order of cards in the deck.
+func (d deck) shuffle() {
+	l := len(d)
+
+	// loop through the deck
+	// generate a random integer b/w 0 & deck length - 1
+	// swap the current card with the one at the rand-int index
+	for i := range d {
+		ri := rand.Intn(l - 1)
+		d[i], d[ri] = d[ri], d[i]
+	}
 }
