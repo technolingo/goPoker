@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type deck []string
@@ -80,11 +81,14 @@ func loadFromFile(filepath string, delimiter string) deck {
 func (d deck) shuffle() {
 	l := len(d)
 
+	// improve the default rand.Intn with a pseudo-random source
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+
 	// loop through the deck
 	// generate a random integer b/w 0 & deck length - 1
 	// swap the current card with the one at the rand-int index
 	for i := range d {
-		ri := rand.Intn(l - 1)
+		ri := r.Intn(l - 1)
 		d[i], d[ri] = d[ri], d[i]
 	}
 }
